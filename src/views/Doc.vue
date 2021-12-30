@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div class="top-nav">
-      <div class="logo"></div>
-      <div class="menu"></div>
-    </div>
+    <Topnav/>
     <div class="content">
       <aside v-if="menuVisible">
         <h2>组件列表</h2>
@@ -27,10 +24,11 @@
   </div>
 </template>
 
-<script lang="js">
-
+<script lang="ts">
+import Topnav from '../components/Topnav.vue';
 export default {
-  name:'Doc'
+  name:'Doc',
+  components: {Topnav}
 }
 </script>
 
