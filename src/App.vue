@@ -4,10 +4,13 @@
 
 <script>
 
+import {ref,provide} from 'vue'
+
 export default {
   name: 'App',
-  components: {
-
+  setup(){
+    const asideVisible = ref(false)
+    provide('asideVisible',asideVisible)
   }
 }
 </script>
