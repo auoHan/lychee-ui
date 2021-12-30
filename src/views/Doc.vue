@@ -2,7 +2,7 @@
   <div>
     <Topnav/>
     <div class="content">
-      <aside v-if="menuVisible">
+      <aside>
         <h2>组件列表</h2>
         <ol>
           <li>
@@ -63,11 +63,10 @@ export default {
 aside {
   background: lightblue;
   width: 150px;
-  padding: 16px;
   position: fixed;
   top: 0;
   left: 0;
-  padding-top: 70px;
+  padding: 70px 16px 16px;
   height: 100%;
   > h2 {
     margin-bottom: 4px;
