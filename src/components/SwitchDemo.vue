@@ -1,6 +1,5 @@
 <template>
 <div>
-  switchDemo
   <Switch/>
 </div>
 </template>
