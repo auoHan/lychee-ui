@@ -4,7 +4,7 @@
   </div>
   <h1>实例1</h1>
   <div>
-    <Button>hello</Button>
+    <Button @click="onClick">hello</Button>
     <Button theme="button">hello</Button>
     <Button theme="link">hello</Button>
     <Button theme="text">hello</Button>
@@ -62,6 +62,12 @@ import Button from '../lib/Button.vue';
 export default {
   name: 'SwitchDemo',
   components: {Button},
+  setup(){
+    const onClick = ()=>{
+      console.log('hi');
+    }
+    return {onClick}
+  }
 };
 </script>
 
