@@ -1,19 +1,34 @@
 <template>
   <button class="lychee-button"
-          :class="`lychee-theme-${theme}`">
+          :class="classes">
     <slot/>
   </button>
 </template>
 
 <script lang="ts">
+import {computed} from 'vue'
 export default {
   name:'Button',
   props:{
     theme:{
       type:String,
       default:'button'
+    },
+    size:{
+      type:String,
+      default:'normal'
     }
   },
+  setup(props){
+    const {theme,size} = props
+    const classes = computed(()=>{
+      return {
+        [`lychee-theme-${theme}`]:theme,
+        [`lychee-size-${size}`]:size,
+      }
+    })
+    return {classes}
+  }
 }
 </script>
 
@@ -54,6 +69,35 @@ $radius: 4px;
 
   &::-moz-focus-inner {
     border: 0;
+  }
+  &.lychee-theme-link{
+    border-color: transparent;
+    box-shadow: none;
+    color: $blue;
+    &:hover,&:focus{
+      color: lighten($blue, 10%);
+    }
+  }
+  &.lychee-theme-text{
+    border-color: transparent;
+    box-shadow: none;
+    color: inherit;
+    &:hover,&:focus{
+      background: darken(white, 5%);;
+    }
+  }
+  &.lychee-theme-button {
+    &.lychee-size-big {
+      font-size: 24px;
+      height: 48px;
+      padding: 0 16px
+    }
+
+    &.lychee-size-small {
+      font-size: 12px;
+      height: 20px;
+      padding: 0 4px;
+    }
   }
 }
 </style>
