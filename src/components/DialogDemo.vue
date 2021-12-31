@@ -2,8 +2,13 @@
   <Button @click="toggle">toggle</Button>
   <Dialog v-model:visible="x" :closeOnClickOverlay="false"
       :ok="ok" :cancel="cancel">
-    <p>h1</p>
-    <p>h2</p>
+    <template v-slot:title>
+      <strong>标题</strong>
+    </template>
+    <template v-slot:content>
+      <p>123</p>
+      <p>456</p>
+    </template>
   </Dialog>
 </template>
 
