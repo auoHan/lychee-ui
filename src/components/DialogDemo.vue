@@ -1,7 +1,10 @@
 <template>
   <Button @click="toggle">toggle</Button>
   <Dialog v-model:visible="x" :closeOnClickOverlay="false"
-      :ok="ok" :cancel="cancel"></Dialog>
+      :ok="ok" :cancel="cancel">
+    <p>h1</p>
+    <p>h2</p>
+  </Dialog>
 </template>
 
 <script lang="ts">
