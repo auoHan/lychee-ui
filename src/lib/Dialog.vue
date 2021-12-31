@@ -1,28 +1,68 @@
 <template>
-  <div class="lychee-dialog-overlay"></div>
-  <div class="lychee-dialog-wrapper">
-    <div class="lychee-dialog">
-      <header>标题 <span class="lychee-dialog-close"></span></header>
-      <main>
-        <p>第一行字</p>
-        <p>第二行字</p>
-      </main>
-      <footer>
-        <Button level="main">OK</Button>
-        <Button>Cancel</Button>
-      </footer>
+  <template v-if="visible">
+    <div class="lychee-dialog-overlay" @click="closeOnClickOverlay"></div>
+    <div class="lychee-dialog-wrapper">
+      <div class="lychee-dialog">
+        <header>标题 <span @click="close" class="lychee-dialog-close"></span></header>
+        <main>
+          <p>第一行字</p>
+          <p>第二行字</p>
+        </main>
+        <footer>
+          <Button level="main" @click="ok">OK</Button>
+          <Button @click="cancel">Cancel</Button>
+        </footer>
+      </div>
     </div>
+  </template>
 </template>
 
 <script lang="ts">
 import Button from './Button.vue';
+
 export default {
-  name:'Dialog',
-  components: {Button}
-}
+  name: 'Dialog',
+  components: {Button},
+  props: {
+    visible: {
+      type: Boolean,
+      default: false
+    },
+    closeOnClickOverlay: {
+      type: Boolean,
+      default: true
+    },
+    ok:{
+      type:Function,
+    },
+    cancel:{
+      type:Function,
+    }
+  },
+  setup(props,context) {
+    const close = () => {
+      context.emit('update:visible',!props.visible);
+    };
+    const closeOnClickOverlay = ()=>{
+      if (props.closeOnClickOverlay){
+        close()
+      }
+    }
+    const ok = () =>{
+      const result = props.ok()
+      if (result){
+        close()
+      }
+    }
+    const cancel = () =>{
+      close()
+    }
+    return {close,closeOnClickOverlay,ok,cancel}
+  }
+};
 </script>
 
-<style lang="scss" >
+<style lang="scss">
 $radius: 4px;
 $border-color: #d9d9d9;
 .lychee-dialog {
