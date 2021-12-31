@@ -4,10 +4,9 @@
   </div>
   <h1>实例1</h1>
   <div>
-    <Button @click="onClick"
-      @focus="onClick"
-      @mouseover="onClick"
-      size="small">hello</Button>
+    <Button theme="button">hello</Button>
+    <Button theme="link">hello</Button>
+    <Button theme="text">hello</Button>
   </div>
 </template>
 
@@ -18,7 +17,6 @@ export default {
   components: {Button},
   setup(){
     const onClick = ()=>{
-      console.log('hi');
     }
     return {onClick}
   }
