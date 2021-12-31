@@ -4,7 +4,10 @@
   </div>
   <h1>实例1</h1>
   <div>
-    <Button>hello</Button>
+    <Button @click="onClick"
+      @focus="onClick"
+      @mouseover="onClick"
+      size="small">hello</Button>
   </div>
 </template>
 
@@ -12,7 +15,13 @@
 import Button from '../lib/Button.vue';
 export default {
   name:'SwitchDemo',
-  components: {Button}
+  components: {Button},
+  setup(){
+    const onClick = ()=>{
+      console.log('hi');
+    }
+    return {onClick}
+  }
 }
 </script>
 

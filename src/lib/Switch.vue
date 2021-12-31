@@ -8,9 +8,9 @@ export default {
   props: {
     value: Boolean
   },
-  setup(props, content) {
+  setup(props, context) {
     const toggle = () => {
-      content.emit('update:value', !props.value);
+      context.emit('update:value', !props.value);
     };
     return {toggle};
   }
