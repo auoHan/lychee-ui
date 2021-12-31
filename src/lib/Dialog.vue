@@ -1,18 +1,20 @@
 <template>
   <template v-if="visible">
-    <div class="lychee-dialog-overlay" @click="closeOnClickOverlay"></div>
-    <div class="lychee-dialog-wrapper">
-      <div class="lychee-dialog">
-        <header><slot name="title"/> <span @click="close" class="lychee-dialog-close"></span></header>
-        <main>
-          <slot name="content"/>
-        </main>
-        <footer>
-          <Button level="main" @click="ok">OK</Button>
-          <Button @click="cancel">Cancel</Button>
-        </footer>
+    <Teleport to="body">
+      <div class="lychee-dialog-overlay" @click="closeOnClickOverlay"></div>
+      <div class="lychee-dialog-wrapper">
+        <div class="lychee-dialog">
+          <header><slot name="title"/> <span @click="close" class="lychee-dialog-close"></span></header>
+          <main>
+            <slot name="content"/>
+          </main>
+          <footer>
+            <Button level="main" @click="ok">OK</Button>
+            <Button @click="cancel">Cancel</Button>
+          </footer>
+        </div>
       </div>
-    </div>
+    </Teleport>
   </template>
 </template>
 
