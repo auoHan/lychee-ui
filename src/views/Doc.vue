@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <Topnav class="nav" />
+    <Topnav class="nav"/>
     <div class="content">
       <aside v-if="asideVisible">
         <h2>组件列表</h2>
@@ -29,14 +29,15 @@
 <script lang="ts">
 import Topnav from '../components/Topnav.vue';
 import {inject, Ref} from 'vue';
+
 export default {
-  name:'Doc',
+  name: 'Doc',
   components: {Topnav},
-  setup(){
+  setup() {
     const asideVisible = inject<Ref<boolean>>('asideVisible');
-    return {asideVisible}
+    return {asideVisible};
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -44,9 +45,11 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100vh;
+
   > .nav {
     flex-shrink: 0;
   }
+
   > .content {
     flex-grow: 1;
     padding-top: 60px;
@@ -56,17 +59,21 @@ export default {
     }
   }
 }
+
 .content {
   display: flex;
+
   > aside {
     flex-shrink: 0;
   }
+
   > main {
     flex-grow: 1;
     padding: 16px;
-    background: lightgreen;
+    background: white;
   }
 }
+
 aside {
   background: lightblue;
   width: 150px;
