@@ -1,6 +1,7 @@
+import './lib/lychee.scss'
+import './index.scss'
 import { createApp } from 'vue'
 import App from './App.vue'
-import './index.scss'
 // @ts-ignore
 import {router} from './router'
 
