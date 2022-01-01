@@ -1,18 +1,26 @@
 <template>
   <div class="lychee-tabs">
     <div class="lychee-tabs-nav">
-      <div class="lychee-tabs-nav-item" v-for="(t,index) in titles" :key="index">{{t}}</div>
+      <div class="lychee-tabs-nav-item"
+           :class="{selected:t===selected}" v-for="(t,index) in titles" :key="index" @click="select(t)">{{t}}</div>
     </div>
     <div class="lychee-tabs-content">
-      <component class="lychee-tabs-content-item" v-for="(c,index) in defaults" :is="c" :key="index" />
+      <component class="lychee-tabs-content-item"
+                 :is="current" :key="selected"/>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import {computed} from 'vue'
 import Tab from './Tab.vue';
 export default {
   name:'Tabs',
+  props:{
+    selected:{
+      type:String
+    }
+  },
   setup(props,context){
     const defaults = context.slots.default()
     defaults.forEach((tag)=>{
@@ -23,8 +31,14 @@ export default {
     const titles = defaults.map((tag)=>{
       return tag.props.title
     })
+    const current = computed(()=>{
+      return defaults.find(tag=>tag.props.title===props.selected)
+    })
+    const select = (title:string)=>{
+      context.emit('update:selected',title)
+    }
     console.log(defaults);
-    return {defaults,titles}
+    return {defaults,titles,select,current}
   }
 }
 </script>
