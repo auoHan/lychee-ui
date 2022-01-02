@@ -1,6 +1,10 @@
 <template>
   <div class="top-nav">
-    <div class="logo">LOGO</div>
+    <div class="logo">
+      <svg class="icon">
+        <use xlink:href="#icon-king"></use>
+      </svg>
+    </div>
     <ul class="menu">
       <li>菜单1</li>
       <li>菜单2</li>
@@ -24,6 +28,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$color: #007974;
 .top-nav {
   display: flex;
   padding: 16px;
@@ -34,9 +39,14 @@ export default {
   z-index: 10;
   justify-content: center;
   align-items: center;
+  color: $color;
   > .logo {
     max-width: 6em;
     margin-right: auto;
+    >svg {
+      width: 32px;
+      height: 32px;
+    }
   }
   > .menu {
     display: flex;
