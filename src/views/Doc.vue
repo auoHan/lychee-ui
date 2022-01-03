@@ -31,7 +31,7 @@
           </li>
         </ol>
       </aside>
-      <main>
+      <main @click="closeAside">
         <router-view/>
       </main>
     </div>
@@ -47,7 +47,13 @@ export default {
   components: {Topnav},
   setup() {
     const asideVisible = inject<Ref<boolean>>('asideVisible');
-    return {asideVisible};
+    const closeAside = () => {
+      const width = document.documentElement.clientWidth;
+      if (width <= 500) {
+        asideVisible.value = false;
+      }
+    };
+    return {asideVisible, closeAside};
   }
 };
 </script>
