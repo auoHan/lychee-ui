@@ -24,7 +24,7 @@ export const router = createRouter({
       children:[
         {
           path:'',
-          component:DocDemo
+          redirect:'/doc/intro'
         },
         { path: "intro",
           component:  md('intro')

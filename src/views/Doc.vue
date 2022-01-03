@@ -53,10 +53,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$aside-index: 10;
 .layout {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  z-index: $aside-index;
 
   > .nav {
     flex-shrink: 0;
@@ -102,11 +104,12 @@ aside {
 
   > ol {
     > li {
-      >a {
+      > a {
         display: block;
         padding: 4px 16px;
         text-decoration: none;
       }
+
       .router-link-active {
         background: white;
       }
