@@ -6,7 +6,7 @@
         <h1>荔枝UI</h1>
         <h2>一个还在学习的UI框架</h2>
         <p class="actions">
-          <a href="https://github.com">GitHub</a>
+          <a href="https://github.com/auoHan/lychee-ui">GitHub</a>
           <router-link to="/doc">开始</router-link>
         </p>
       </div>
