@@ -4,6 +4,7 @@
       <svg class="icon">
         <use xlink:href="#icon-lychee"></use>
       </svg>
+      <h4 v-if="route.name!=='home'">首页</h4>
     </router-link>
     <ul class="menu">
       <li>
@@ -18,6 +19,7 @@
 
 <script lang="ts">
 import {inject,Ref} from 'vue'
+import { useRoute } from "vue-router"
 export default {
   name:'Topnav',
   props: {
@@ -31,7 +33,8 @@ export default {
     const toggleAside = () =>{
       asideVisible.value = !asideVisible.value
     }
-    return {toggleAside}
+    const route = useRoute();
+    return {toggleAside,route}
   }
 }
 </script>
@@ -55,6 +58,13 @@ $color: #007974;
     >svg {
       width: 32px;
       height: 32px;
+      display: inline-block;
+      vertical-align:bottom;
+    }
+    >h4{
+      display: inline-block;
+      vertical-align:middle;
+      transform: translateY(-2px);
     }
   }
   > .menu {

@@ -16,7 +16,8 @@ export const router = createRouter({
   routes:[
     {
       path:'/',
-      component:Home
+      component:Home,
+      name:'home'
     },
     {
       path:'/doc',
