@@ -1,24 +1,27 @@
 <template>
-  <button class="lychee-button"
-          :class="classes"
-          :disabled="disabled">
+  <button class="lychee-button" :class="classes" :disabled="disabled">
     <span v-if="loading" class="lychee-loadingIndicator"></span>
-    <slot/>
+    <slot />
   </button>
 </template>
-
-<script lang="ts">
-import {computed} from 'vue'
+<script lang="ts" setup="props">
+import { computed } from "vue";
+declare const props: {
+  theme?: 'button' | 'text' | 'link';
+  size?: 'normal' | 'big' | 'small';
+  level?: 'normal' | 'main' | 'danger';
+  disabled: boolean;
+  loading: boolean;
+}
 export default {
-  name:'Button',
-  props:{
-    theme:{
-      type:String,
-      default:'button'
+  props: {
+    theme: {
+      type: String,
+      default: "button",
     },
-    size:{
-      type:String,
-      default:'normal'
+    size: {
+      type: String,
+      default: "normal",
     },
     level: {
       type: String,
@@ -33,20 +36,16 @@ export default {
       default: false
     }
   },
-  setup(props){
-    const {theme,size, level} = props
-    const classes = computed(()=>{
-      return {
-        [`lychee-theme-${theme}`]:theme,
-        [`lychee-size-${size}`]:size,
-        [`lychee-level-${level}`]: level,
-      }
-    })
-    return {classes}
-  }
-}
+};
+const { theme, size, level } = props;
+export const classes = computed(() => {
+  return {
+    [`lychee-theme-${theme}`]: theme,
+    [`lychee-size-${size}`]: size,
+    [`lychee-level-${level}`]: level,
+  };
+});
 </script>
-
 <style lang="scss">
 $h: 32px;
 $border-color: #d9d9d9;
@@ -73,42 +72,40 @@ $grey: grey;
   & + & {
     margin-left: 8px;
   }
-
   &:hover,
   &:focus {
     color: $blue;
     border-color: $blue;
   }
-
   &:focus {
     outline: none;
   }
-
   &::-moz-focus-inner {
     border: 0;
   }
-  &.lychee-theme-link{
+  &.lychee-theme-link {
     border-color: transparent;
     box-shadow: none;
     color: $blue;
-    &:hover,&:focus{
+    &:hover,
+    &:focus {
       color: lighten($blue, 10%);
     }
   }
-  &.lychee-theme-text{
+  &.lychee-theme-text {
     border-color: transparent;
     box-shadow: none;
     color: inherit;
-    &:hover,&:focus{
-      background: darken(white, 5%);;
+    &:hover,
+    &:focus {
+      background: darken(white, 5%);
     }
   }
   &.lychee-size-big {
     font-size: 24px;
     height: 48px;
-    padding: 0 16px
+    padding: 0 16px;
   }
-
   &.lychee-size-small {
     font-size: 12px;
     height: 20px;

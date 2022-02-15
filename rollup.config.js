@@ -12,13 +12,13 @@ export default {
     globals: {
       vue: 'Vue'
     },
-    name: 'Gulu',
-    file: 'dist/lib/gulu.js',
+    name: 'Lychee',
+    file: 'dist/lib/lychee.js',
     format: 'umd',
     plugins: [terser()]
   }, {
-    name: 'Gulu',
-    file: 'dist/lib/gulu.esm.js',
+    name: 'Lychee',
+    file: 'dist/lib/lychee.esm.js',
     format: 'es',
     plugins: [terser()]
   }],

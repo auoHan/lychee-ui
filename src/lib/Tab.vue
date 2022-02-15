@@ -1,15 +1,13 @@
 <template>
 <div>
-  <slot/>
+  <slot />
 </div>
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue'
+defineComponent
 export default {
-  name:'Tab'
+  name: 'Tab'
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
