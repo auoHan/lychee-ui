@@ -1,20 +1,19 @@
 <template>
-  <button class="lychee-switch" @click="toggle" :class="{'lychee-checked':value}">
-    <span></span>
-  </button>
+  <button class="lychee-switch" :class="{'lychee-checked':value}" @click="toggle"><span></span></button>
 </template>
-<script lang="ts" setup="props, context">
-import {ref, SetupContext} from 'vue';
 
-declare const props: { value: boolean };
-declare const context: SetupContext;
+<script lang="ts">
 export default {
+  name: 'Switch',
   props: {
-    value: Boolean,
+    value: Boolean
   },
-};
-export const toggle = () => {
-  context.emit('update:value', !props.value);
+  setup(props, context) {
+    const toggle = () => {
+      context.emit('update:value', !props.value);
+    };
+    return {toggle};
+  }
 };
 </script>
 
@@ -23,7 +22,7 @@ $h: 22px;
 $h2: $h - 4px;
 .lychee-switch {
   height: $h;
-  width: $h * 2;
+  width: $h*2;
   border: none;
   background: #bfbfbf;
   border-radius: $h/2;

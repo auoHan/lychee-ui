@@ -1,37 +1,29 @@
 <template>
-<template v-if="visible">
-  <Teleport to="body">
-    <div class="lychee-dialog-overlay" @click="onClickOverlay"></div>
-    <div class="lychee-dialog-wrapper">
-      <div class="lychee-dialog">
-        <header>
-          <slot name="title" />
-          <span @click="close" class="lychee-dialog-close"></span>
-        </header>
-        <main>
-          <slot name="content" />
-        </main>
-        <footer>
-          <Button level="main" @click="onClickOk">OK</Button>
-          <Button @click="onClickCancel">Cancel</Button>
-        </footer>
+  <template v-if="visible">
+    <Teleport to="body">
+      <div class="lychee-dialog-overlay" @click="closeOnClickOverlay"></div>
+      <div class="lychee-dialog-wrapper">
+        <div class="lychee-dialog">
+          <header><slot name="title"/> <span @click="close" class="lychee-dialog-close"></span></header>
+          <main>
+            <slot name="content"/>
+          </main>
+          <footer>
+            <Button level="main" @click="ok">OK</Button>
+            <Button @click="cancel">Cancel</Button>
+          </footer>
+        </div>
       </div>
-    </div>
-  </Teleport>
-</template>
+    </Teleport>
+  </template>
 </template>
 
-<script lang="ts" setup="props, context">
-import { SetupContext } from 'vue';
-import Button from "./Button.vue";
-declare const props: {
-  visible: boolean;
-  closeOnClickOverlay: boolean;
-  ok: () => boolean;
-  cancel: () => void
-}
-declare const context: SetupContext
+<script lang="ts">
+import Button from './Button.vue';
+
 export default {
+  name: 'Dialog',
+  components: {Button},
   props: {
     visible: {
       type: Boolean,
@@ -41,40 +33,40 @@ export default {
       type: Boolean,
       default: true
     },
-    ok: {
-      type: Function
+    ok:{
+      type:Function,
     },
-    cancel: {
-      type: Function
+    cancel:{
+      type:Function,
+    },
+  },
+  setup(props,context) {
+    const close = () => {
+      context.emit('update:visible',!props.visible);
+    };
+    const closeOnClickOverlay = ()=>{
+      if (props.closeOnClickOverlay){
+        close()
+      }
     }
-  },
-  components: {
-    Button,
-  },
+    const ok = () =>{
+      const result = props.ok()
+      if (result){
+        close()
+      }
+    }
+    const cancel = () =>{
+      props.cancel?.()
+      close()
+    }
+    return {close,closeOnClickOverlay,ok,cancel}
+  }
 };
-export const close = () => {
-  context.emit('update:visible', false)
-}
-export const onClickOverlay = () => {
-  if (props.closeOnClickOverlay) {
-    close()
-  }
-}
-export const onClickOk = () => {
-  if (props.ok && props.ok() !== false) {
-    close()
-  }
-}
-export const onClickCancel = () => {
-  props.cancel && props.cancel()
-  close()
-}
 </script>
 
 <style lang="scss">
 $radius: 4px;
 $border-color: #d9d9d9;
-
 .lychee-dialog {
   background: white;
   border-radius: $radius;
@@ -100,7 +92,7 @@ $border-color: #d9d9d9;
     z-index: 11;
   }
 
-  >header {
+  > header {
     padding: 12px 16px;
     border-bottom: 1px solid $border-color;
     display: flex;
@@ -109,11 +101,11 @@ $border-color: #d9d9d9;
     font-size: 20px;
   }
 
-  >main {
+  > main {
     padding: 12px 16px;
   }
 
-  >footer {
+  > footer {
     border-top: 1px solid $border-color;
     padding: 12px 16px;
     text-align: right;
@@ -144,7 +136,6 @@ $border-color: #d9d9d9;
     &::after {
       transform: translate(-50%, -50%) rotate(45deg);
     }
-
   }
 }
 </style>
